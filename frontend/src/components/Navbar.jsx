@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { assets } from '../assets/assets.js'
 import { NavLink } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
+import { DataContext } from '../context/DataContext.jsx'
 
 const Navbar = () => {
     
     const [open, setOpen] = useState(false)
-    const [login,setLogin] = useState(false)
+    const {token,setToken} = useContext(DataContext)
+
+    const finalToken = localStorage.getItem("token") || token
 
 
   return (
@@ -33,12 +36,13 @@ const Navbar = () => {
 
             <div className='flex gap-10 items-center' >
                 {
-                    !login && (
+                    !finalToken && (
                         <div className=' text-xl'>
                             <NavLink to='/login' className='hover:text-violet-500 transition-all duration-300 font-medium'>Login</NavLink>
                         </div>
                     )
                 }
+
                 <NavLink to='/profile' className='hidden sm:block gap-2'>
                     <img src={assets.profile_icon} className="w-10 hover:scale-110 transition-all duration-300" />
                 </NavLink>
@@ -46,14 +50,14 @@ const Navbar = () => {
 
         </div>
         {
-        open && (
-            <div className='sm:hidden mt-4 flex flex-col gap-4 bg-slate-900 rounded-xl p-4'>
-                <NavLink to='/challenges' onClick={() => setOpen(false)} className='hover:text-violet-500'>Challenges</NavLink>
-                <NavLink to='/dashboard' onClick={() => setOpen(false)} className='hover:text-violet-500'>Dashboard</NavLink>
-                <NavLink to='/leaderboard' onClick={() => setOpen(false)} className='hover:text-violet-500'>Leaderboard</NavLink>
-                <NavLink to='/profile' onClick={() => setOpen(false)} className='hover:text-violet-500'>Profile</NavLink>
-            </div>
-        )
+            open && (
+                <div className='sm:hidden mt-4 flex flex-col gap-4 bg-slate-900 rounded-xl p-4'>
+                    <NavLink to='/challenges' onClick={() => setOpen(false)} className='hover:text-violet-500'>Challenges</NavLink>
+                    <NavLink to='/dashboard' onClick={() => setOpen(false)} className='hover:text-violet-500'>Dashboard</NavLink>
+                    <NavLink to='/leaderboard' onClick={() => setOpen(false)} className='hover:text-violet-500'>Leaderboard</NavLink>
+                    <NavLink to='/profile' onClick={() => setOpen(false)} className='hover:text-violet-500'>Profile</NavLink>
+                </div>
+            )
         }
         
     </div>

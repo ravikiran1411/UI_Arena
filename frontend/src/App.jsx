@@ -9,10 +9,12 @@ import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Navbar from './components/Navbar'
 import Leaderboard from './pages/Leaderboard'
+import { ToastContainer } from 'react-toastify'
 
 const App = () => {
   return (
     <div className=''>
+      <ToastContainer />
       <Navbar />
       <Routes>
         <Route path='/' element={<Home/>}/>
