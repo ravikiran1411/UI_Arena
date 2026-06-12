@@ -61,72 +61,71 @@ const Login = () => {
     }
 
 
-
   return (
     <div className="min-h-screen flex items-center justify-center">
 
-        <form onSubmit={submitHandler} className="bg-slate-900 w-112.5 max-w-[90%] mx-auto mt-20 p-8 rounded-xl border border-slate-800 flex flex-col gap-5">
+        <form onSubmit={submitHandler} className="bg-neutral-900 w-112.5 max-w-[90%] mx-auto mt-20 p-8 rounded-xl border border-neutral-800 flex flex-col gap-5">
             <div>
                 <h1 className='text-3xl font-bold uppercase text-center '>{loginType}</h1>
             </div>
             <div className='flex flex-col gap-3'>
                 { loginType === 'signUp' && (
                     <div className='flex flex-col gap-2'>
-                        <label className='text-lg font-medium text-slate-300'>Enter user name</label>
+                        <label className='text-lg font-medium text-neutral-400'>Enter user name</label>
                         <input 
                         type='text' 
                         value={name}
                         onChange={(e)=>setName(e.target.value)}
-                        className='outline-none border border-slate-700 text-xl w-full h-12 px-4 rounded-lg focus:border-violet-500' 
+                        className='outline-none border border-neutral-700 text-xl w-full h-12 px-4 rounded-lg focus:border-rose-500' 
                         />
                     </div>
                     )   
                 }
 
                 <div className='text-xl flex flex-col gap-2'>
-                    <label className='text-lg font-medium text-slate-300'>Enter Email:</label>
+                    <label className='text-lg font-medium text-neutral-400'>Enter Email:</label>
                     <input 
                     type='email'
                     value={email}
                     onChange={(e)=>setEmail(e.target.value)}
-                    className= 'outline-none border border-slate-700 text-xl w-full h-12 px-4 rounded-lg focus:border-violet-500' 
+                    className='outline-none border border-neutral-700 text-xl w-full h-12 px-4 rounded-lg focus:border-rose-500' 
                     />
                 </div>
 
                 <div className='text-xl flex flex-col gap-2'>
-                    <label className='text-lg font-medium text-slate-300'>Enter Password</label>
+                    <label className='text-lg font-medium text-neutral-400'>Enter Password</label>
                     <input 
                     type='password' 
                     value={password}
                     onChange={(e)=>setPassword(e.target.value)}
-                    className='outline-none border border-slate-700 text-xl w-full h-12 px-4 rounded-lg focus:border-violet-500' />
+                    className='outline-none border border-neutral-700 text-xl w-full h-12 px-4 rounded-lg focus:border-rose-500' 
+                    />
                 </div>
             </div>
 
             <div className='flex justify-between gap-5'>
 
-                <p className="text-slate-400 hover:text-violet-500 cursor-pointer">Forgot Password?</p>
+                <p className="text-neutral-400 hover:text-rose-500 cursor-pointer">Forgot Password?</p>
 
                 <div>
                     {
                         loginType==="login" && (
-                        <p className="text-slate-400">Don't have an account?
-                            <span onClick={()=>switchMode("signUp")} className="text-violet-500 cursor-pointer ml-1">
+                        <p className="text-neutral-400">Don't have an account?
+                            <span onClick={()=>switchMode("signUp")} className="text-rose-500  cursor-pointer ml-1">
                                 Sign Up
                             </span>
                         </p>
-
                         )
                     }
-                
                 {
                 loginType==='signUp' && (
-                    <button onClick={()=>switchMode("login")} className='text-lg font-medium text-violet-600'>login</button>
+                    <span onClick={()=>switchMode("login")} className='text-lg font-medium text-rose-500'>login</span>
                 )
                 }
                 </div>
             </div>
-            <button type='submit' className='border p-2 text-black bg-white rounded text-xl uppercase'>{loginType}</button>
+            
+            <button type='submit' className='border p-2 text-white bg-rose-500 hover:bg-rose-600 rounded transition-all duration-300 text-xl uppercase'>{loginType}</button>
         </form>
     </div>
   )

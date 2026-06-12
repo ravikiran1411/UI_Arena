@@ -13,7 +13,7 @@ const Navbar = () => {
 
 
   return (
-    <div id="navbar" className='bg-slate-900/80 border-b border-slate-800 px-4 sm:px-20 py-3 sm:py-5 sticky top-0 z-50 backdrop-blur-md'>
+    <div id="navbar" className='bg-neutral-900/80 border-b border-neutral-700 px-4 sm:px-20 py-3 sm:py-5 sticky top-0 z-50 backdrop-blur-md'>
         <div className='max-w-7xl mx-auto flex justify-between'>
 
             <NavLink to='/'>
@@ -21,9 +21,9 @@ const Navbar = () => {
             </NavLink>
             <div>
                 <div className='sm:flex gap-8 pt-2 items-center hidden '>
-                    <NavLink to='/challenges' className={({isActive})=> isActive ? "text-violet-500 text-xl" : "text-white hover:text-violet-400 transition-all duration-300 text-xl"}>Challenges</NavLink>
-                    <NavLink to='/dashboard' className={({isActive})=> isActive ? "text-violet-500 text-xl" : "text-white hover:text-violet-400 transition-all duration-300 text-xl"} >Dashboard</NavLink>
-                    <NavLink to='/leaderboard' className={({isActive})=> isActive ? "text-violet-500 text-xl" : "text-white hover:text-violet-400 transition-all duration-300 text-xl"}>Leaderboard</NavLink>
+                    <NavLink to='/challenges' className={({isActive})=> isActive ? "text-rose-500 text-xl font-medium" : "text-neutral-400 hover:text-rose-400 transition-all duration-300 text-xl"}>Challenges</NavLink>
+                    <NavLink to='/dashboard' className={({isActive})=> isActive ? "text-rose-500 text-xl font-medium" : "text-neutral-400 hover:text-rose-400 transition-all duration-300 text-xl"} >Dashboard</NavLink>
+                    <NavLink to='/leaderboard' className={({isActive})=> isActive ? "text-rose-500 text-xl font-medium" : "text-neutral-400 hover:text-rose-400 transition-all duration-300 text-xl"}>Leaderboard</NavLink>
                 </div>
             </div>
 
@@ -38,7 +38,7 @@ const Navbar = () => {
                 {
                     !finalToken && (
                         <div className=' text-xl'>
-                            <NavLink to='/login' className='hover:text-violet-500 transition-all duration-300 font-medium'>Login</NavLink>
+                            <NavLink to='/login' className='hover:text-rose-500 transition-all duration-300 font-medium'>Login</NavLink>
                         </div>
                     )
                 }
@@ -52,10 +52,10 @@ const Navbar = () => {
         {
             open && (
                 <div className='sm:hidden mt-4 flex flex-col gap-4 bg-slate-900 rounded-xl p-4'>
-                    <NavLink to='/challenges' onClick={() => setOpen(false)} className='hover:text-violet-500'>Challenges</NavLink>
-                    <NavLink to='/dashboard' onClick={() => setOpen(false)} className='hover:text-violet-500'>Dashboard</NavLink>
-                    <NavLink to='/leaderboard' onClick={() => setOpen(false)} className='hover:text-violet-500'>Leaderboard</NavLink>
-                    <NavLink to='/profile' onClick={() => setOpen(false)} className='hover:text-violet-500'>Profile</NavLink>
+                    <NavLink to='/challenges' onClick={() => setOpen(false)} className='hover:text-rose-500'>Challenges</NavLink>
+                    <NavLink to='/dashboard' onClick={() => setOpen(false)} className='hover:text-rose-500'>Dashboard</NavLink>
+                    <NavLink to='/leaderboard' onClick={() => setOpen(false)} className='hover:text-rose-500'>Leaderboard</NavLink>
+                    <NavLink to='/profile' onClick={() => setOpen(false)} className='hover:text-rose-500'>Profile</NavLink>
                 </div>
             )
         }
