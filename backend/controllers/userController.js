@@ -1,4 +1,4 @@
-import userModel from "../model/userModel";
+import userModel from "../model/userModel.js";
 import jwt from 'jsonwebtoken'
 import bcrypt from "bcryptjs";
 
@@ -73,4 +73,31 @@ const userRegister = async (req,res) => {
     }
 }
 
-export {userLogin,userRegister}
+const adminLogin = async (req,res) => {
+    try {
+        
+        const {email,password} = req.body;
+
+        if (!email || !password) {
+            return res.json({success:false,message:"required both admin email and password"});
+        }
+
+        if (email !== process.env.ADMIN_EMAIL) {
+            return res.json({success:false,message:"email mismatched.."})
+        }
+
+        if (password!==process.env.ADMIN_PASSWORD) {
+            return res.json({success:false,message:"wrong password"})
+        }
+
+        const token = jwt.sign({email},process.env.JWT_SECRET,{expiresIn:'2d'})
+
+        res.json({success:true,token})
+
+    } catch (error) {
+        console.log(error);
+        res.json({success:false,message:error.message})
+    }
+}
+
+export {userLogin,userRegister,adminLogin}
