@@ -13,7 +13,6 @@ const Hero = () => {
       <div className="grid lg:grid-cols-2 gap-16 items-center w-full">
 
         <div>
-
             <motion.p 
             initial={{opacity:0,y:40}}
             animate={{opacity:1,y:0}}
@@ -57,7 +56,7 @@ const Hero = () => {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="flex justify-center"
+        className="hidden sm:flex justify-center"
         >
 
           <div className="-rotate-1 bg-neutral-900 border border-neutral-800 rounded-3xl p-6 w-full max-w-md shadow-xl">
