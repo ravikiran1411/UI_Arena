@@ -7,6 +7,8 @@ const adminAuth = async (req,res,next) => {
         if (!token) {
             return res.json({success:false,message:"login required"})
         }
+        console.log("reached");
+        
 
         const decoded = jwt.verify(token,process.env.JWT_SECRET)
 

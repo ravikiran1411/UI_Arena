@@ -2,7 +2,7 @@
 import express from 'express'
 import upload from '../middleware/multer.js'
 import adminAuth from '../middleware/adminAuth.js'
-import { addChallenge, getChallenge, updateChallenge } from '../controllers/challengeController.js'
+import { addChallenge, deleteChallenge, getChallenge, singleChallenge, updateChallenge } from '../controllers/challengeController.js'
 
 const challengeRouter = express.Router()
 
@@ -10,6 +10,10 @@ challengeRouter.post('/addchallenge',adminAuth,upload.single("image"),addChallen
 
 challengeRouter.get('/list',getChallenge);
 
-challengeRouter.patch('/update',adminAuth,updateChallenge)
+challengeRouter.patch('/update/:id',adminAuth,upload.single("image"),updateChallenge)
 
-export default challengeRouter
+challengeRouter.get('/singlechallenge/:id',singleChallenge)
+
+challengeRouter.post('/delete/:id',adminAuth,deleteChallenge)
+
+export default challengeRouter 

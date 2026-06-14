@@ -15,6 +15,6 @@ const connectCloudinary = () => {
     } catch (error) {
         console.log("cloudinary error");
     }
-} 
+}
 
 export default connectCloudinary;

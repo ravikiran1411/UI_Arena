@@ -10,6 +10,7 @@ const addChallenge = async (req,res) => {
 
         const outputImage = req.file
 
+
         if (!title || !description || !difficulty || !category || !requirements || !validationRules || !outputImage ) {
             return res.json({success:false,message:"fill all feilds"})
         }
@@ -21,15 +22,21 @@ const addChallenge = async (req,res) => {
             imageUrl=resultURL.secure_url;
         }
 
+        const lastChallenge = await challengeModel.findOne({}).sort({challengeNumber:-1});
+
+        const challengeNumber = lastChallenge ? lastChallenge.challengeNumber+1 : 1;
+
         const challenge= await challengeModel.create({
+            challengeNumber,
             title,
             description,
             difficulty,
             category,
-            requirements:JSON.parse(requirement),
+            requirements:JSON.parse(requirements),
             validationRules:JSON.parse(validationRules),
             outputImage:imageUrl
         });
+
 
         res.json({success:true,message:"challenge added successfully..",challenge})
 
@@ -56,16 +63,17 @@ const getChallenge = async (req,res) => {
 const updateChallenge = async (req,res) => {
     try {
         
-        const {id,title,description,difficulty,category,requirements,validationRules} = req.body;
+        const {title,description,difficulty,category,requirements,validationRules} = req.body;
+
+        const {id} = req.params;
 
         const imageFile = req.file
 
-        const challenge = await challengeModel.findById({id});
+        const challenge = await challengeModel.findById(id);
 
         if (!challenge) {
             return res.json({success:false,message:"challenge not found"})
         }
-
 
         if (imageFile) {
             const resultUrl = await cloudinary.uploader.upload(imageFile.path,{resource_type:"image"});
@@ -94,7 +102,7 @@ const updateChallenge = async (req,res) => {
 const singleChallenge = async (req,res) => {
     try {
         
-        const challenge = await challengeModel.findById(req.body.id);
+        const challenge = await challengeModel.findById(req.params.id);
 
         if (!challenge) {
             return res.json({success:false,message:"challenge not found"})
@@ -109,4 +117,26 @@ const singleChallenge = async (req,res) => {
     }
 }
 
-export {addChallenge,getChallenge,updateChallenge,singleChallenge}
+const deleteChallenge = async (req,res) => {
+    try {
+        
+        const {id} = req.params
+        console.log(id);        
+
+        const challenge = await challengeModel.findById(id)
+
+        if (!challenge) {
+            return res.json({success:false,message:"challenge not found"})
+        }
+
+        await challengeModel.findByIdAndDelete(id)
+
+        res.json({success:true,message:"challenge deleted successfully"})
+
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({success:false,message:error.message});
+    }
+}
+
+export {addChallenge,getChallenge,updateChallenge,singleChallenge,deleteChallenge}

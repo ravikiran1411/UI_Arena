@@ -8,8 +8,9 @@ const schema = new mongoose.Schema({
     category:{type:String,enum:["HTML","CSS"]},
     requirements:{type:[String],default:[]},
     outputImage:{type:String,required:true},
+    challengeNumber:{type:Number,required:true,unique:true},
     validationRules:[{
-        Selector:{
+        selector:{
             type:String,
             required:true
         },

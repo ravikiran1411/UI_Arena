@@ -38,31 +38,31 @@ const Login = ({setToken}) => {
   return (
     <div className='min-h-screen flex items-center justify-center'>
 
-      <form onSubmit={onSubmitHandler} className='bg-neutral-800 border border-neutral-800 p-8 rounded-xl w-[400px] max-w-[90%] flex flex-col gap-5'>
+      <form onSubmit={onSubmitHandler} className='bg-slate-900 border border-slate-800 p-8 rounded-xl w-[400px] max-w-[90%] flex flex-col gap-5'>
 
-        <h1 className='text-xl md:text-3xl font-bold text-center text-rose-500'>ADMIN LOGIN</h1>
+        <h1 className='text-xl md:text-3xl font-bold text-center text-cyan-500'>ADMIN LOGIN</h1>
 
         <div className='flex flex-col gap-2'>
-          <label className='text-neutral-400'>Email</label>
+          <label className='text-slate-400'>Email</label>
           <input
             type='email'
             value={email}
             onChange={(e)=>setEmail(e.target.value)}
-            className='border border-neutral-700 text-white rounded-lg h-12 px-4 outline-none focus:border-rose-500'
+            className='border border-slate-700 text-slate-100 rounded-lg h-12 px-4 outline-none focus:border-cyan-500'
           />
         </div>
 
         <div className='flex flex-col gap-2'>
-          <label className='text-neutral-400'>Password</label>
+          <label className='text-slate-400'>Password</label>
           <input
             type='password'
             value={password}
             onChange={(e)=>setPassword(e.target.value)}
-            className='border border-neutral-700 text-white rounded-lg h-12 px-4 outline-none focus:border-rose-500'
+            className='border border-slate-700 text-slate-100 rounded-lg h-12 px-4 outline-none focus:border-cyan-500'
           />
         </div>
 
-        <button type='submit' className='bg-rose-500 hover:bg-rose-600 transition-all duration-300 py-3 rounded-lg font-medium'>
+        <button type='submit' className='bg-cyan-500 hover:bg-cyan-600 text-slate-100 transition-all duration-300 py-3 rounded-lg font-medium'>
           Login
         </button>
 

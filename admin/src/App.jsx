@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import AddChallenge from './pages/AddChallenge'
 import ListChallenge from './pages/ListChallenge'
 import Navbar from './components/Navbar'
+import UpdateChallenge from './pages/UpdateChallenge';
 
 export const backendUrl = import.meta.env.VITE_BACKEND;
 
@@ -15,7 +16,7 @@ const App = () => {
 
   useEffect(()=>{
     if (token) {
-      localStorage.setItem('adminToken',"adminToken")
+      localStorage.setItem('adminToken',token)
     } else {
       localStorage.removeItem('adminToken')
     }
@@ -31,8 +32,9 @@ const App = () => {
         <div>
           <Navbar setToken={setToken}/>
           <Routes>
-            <Route path='/' element={<AddChallenge/>}/>
-            <Route path='/list' element={<ListChallenge/>} />
+            <Route path='/' element={<AddChallenge token={token}/>}/>
+            <Route path='/list' element={<ListChallenge token={token} />} />
+            <Route path='/update/:id' element={<UpdateChallenge/>} />
           </Routes>
         </div>
         

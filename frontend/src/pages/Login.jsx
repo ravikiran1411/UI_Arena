@@ -88,7 +88,7 @@ const Login = () => {
                     type='email'
                     value={email}
                     onChange={(e)=>setEmail(e.target.value)}
-                    className='outline-none border border-neutral-700 text-xl w-full h-12 px-4 rounded-lg focus:border-rose-500' 
+                    className='outline-none border border-neutral-700 text-neutral-100 text-xl w-full h-12 px-4 rounded-lg focus:border-rose-500' 
                     />
                 </div>
 
@@ -98,7 +98,7 @@ const Login = () => {
                     type='password' 
                     value={password}
                     onChange={(e)=>setPassword(e.target.value)}
-                    className='outline-none border border-neutral-700 text-xl w-full h-12 px-4 rounded-lg focus:border-rose-500' 
+                    className='outline-none border border-neutral-700 text-neutral-100 text-xl w-full h-12 px-4 rounded-lg focus:border-rose-500' 
                     />
                 </div>
             </div>
@@ -111,7 +111,7 @@ const Login = () => {
                     {
                         loginType==="login" && (
                         <p className="text-neutral-400">Don't have an account?
-                            <span onClick={()=>switchMode("signUp")} className="text-rose-500  cursor-pointer ml-1">
+                            <span onClick={()=>switchMode("signUp")} className="text-rose-500 cursor-pointer ml-1">
                                 Sign Up
                             </span>
                         </p>
