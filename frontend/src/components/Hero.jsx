@@ -18,7 +18,7 @@ const Hero = () => {
             animate={{opacity:1,y:0}}
             transition={{duration:0.5,delay:0}}
             className="text-rose-500 font-medium">
-                UI Arena
+              UI Arena
             </motion.p>
 
             <motion.h1
@@ -45,8 +45,8 @@ const Hero = () => {
             transition={{duration:0.5,delay:0.3}}
             onClick={()=>navigate('/challenges')}
             className="group mt-8 bg-rose-500 hover:bg-rose-600 transition-all duration-300 px-8 py-4 rounded-xl font-semibold flex items-center gap-2">
-                Start Building
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300"/>
+              Start Building
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300"/>
             </motion.button>
 
         </div>
