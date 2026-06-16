@@ -13,6 +13,9 @@ const DataContextProvider = (props) => {
     const [token,setToken]=useState(localStorage.getItem('token') || "")
     const [challenge,setChallenge] = useState([])
 
+    console.log(token);
+    
+
     const challengeList = async () => {
         try {
             
@@ -36,7 +39,7 @@ const DataContextProvider = (props) => {
     },[])
 
     const value = {
-        token,setToken,backendUrl,challengeList,challenge,setChallenge
+        token,setToken,backendUrl,challenge,setChallenge
     }
 
     return (
