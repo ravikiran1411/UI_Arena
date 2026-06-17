@@ -26,7 +26,7 @@ const saveSubmission = async (req,res) => {
 const getSubmission = async (req,res) => {
     try {
         const {challengeId} = req.params
-        const {userId} = req.userId
+        const userId = req.userId
 
         if (!challengeId) {
             return res.json({success:false,message:"challengeId required"})
@@ -42,4 +42,19 @@ const getSubmission = async (req,res) => {
     }
 }
 
-export {saveSubmission,getSubmission};
+const getUserSubmission = async (req,res) => {
+    try {
+        
+        const userId = req.userId
+
+        const challenges = await submissionModel.find({userId}).select("challengeId status")
+
+        res.json({success:true,challenges})
+
+    } catch (error) {
+        console.log(error.message);
+        res.json({success:false,message:error.message})        
+    }
+}
+
+export {saveSubmission,getSubmission,getUserSubmission};

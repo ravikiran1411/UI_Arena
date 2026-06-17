@@ -12,9 +12,11 @@ const DataContextProvider = (props) => {
 
     const [token,setToken]=useState(localStorage.getItem('token') || "")
     const [challenge,setChallenge] = useState([])
+    const [submissions,setSubmissions] = useState([])
 
     console.log(token);
-    
+
+    const finalToken = localStorage.getItem('token') || token
 
     const challengeList = async () => {
         try {
@@ -34,12 +36,32 @@ const DataContextProvider = (props) => {
         }
     }
 
+    const getUserSubmissions = async () => {
+        try {
+            const response = await axios.get(backendUrl+'/api/submission/user',{headers:{token:finalToken}})
+            console.log(response.data);
+            
+
+            if (response.data.success) {
+                setSubmissions(response.data.challenges)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(()=>{
         challengeList()
     },[])
 
+    useEffect(()=>{
+        if(token){
+            getUserSubmissions()
+        }
+    },[token])
+
     const value = {
-        token,setToken,backendUrl,challenge,setChallenge
+        token,setToken,backendUrl,challenge,setChallenge,submissions
     }
 
     return (

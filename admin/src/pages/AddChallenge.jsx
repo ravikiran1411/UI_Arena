@@ -54,10 +54,7 @@ const AddChallenge = ({token}) => {
       
     } catch (error) {
       console.log(error.message);
-      
     }
-
-
   }
 
 
