@@ -12,12 +12,17 @@ const DataContextProvider = (props) => {
 
     const [token,setToken]=useState(localStorage.getItem('token') || "")
     const [challenge,setChallenge] = useState([])
-    const [submissions,setSubmissions] = useState([])
+    const [submissions,setSubmissions] = useState([])    
 
     console.log(token);
 
-    const finalToken = localStorage.getItem('token') || token
+    const finalToken = localStorage.getItem('token') || token 
 
+    const totalChallenges = challenge.length
+    const completedCount = submissions.filter((item)=>item.status==="completed").length;
+    const inprogressCount = submissions.filter((item)=>item.status==="in-progress").length
+
+    
     const challengeList = async () => {
         try {
             
@@ -25,7 +30,6 @@ const DataContextProvider = (props) => {
 
             if (response.data.success) {
                 setChallenge(response.data.challenges)
-                console.log(response.data.challenges);
             }
             else{
                 console.log(response.data.message);
@@ -40,11 +44,11 @@ const DataContextProvider = (props) => {
         try {
             const response = await axios.get(backendUrl+'/api/submission/user',{headers:{token:finalToken}})
             console.log(response.data);
-            
 
             if (response.data.success) {
                 setSubmissions(response.data.challenges)
             }
+           
         } catch (error) {
             console.log(error);
         }
@@ -61,7 +65,7 @@ const DataContextProvider = (props) => {
     },[token])
 
     const value = {
-        token,setToken,backendUrl,challenge,setChallenge,submissions
+        token,setToken,backendUrl,challenge,setChallenge,submissions,totalChallenges,completedCount,inprogressCount
     }
 
     return (
