@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 const Login = () => {
 
-    const {token,setToken,backendUrl} = useContext(DataContext);
+    const {token,setToken,backendUrl,userName,setUserName} = useContext(DataContext);
 
     const [loginType,setLoginType] = useState("signUp")
 
@@ -33,6 +33,7 @@ const Login = () => {
                 if (response.data.success) {
                     
                     setToken(response.data.token)
+                    setUserName(response.data.name)
                     localStorage.setItem("token",response.data.token)
                     toast.success("account created succesfully..")
                     navigate('/')
@@ -46,6 +47,7 @@ const Login = () => {
                 
                 if (response.data.success) {
                     setToken(response.data.token)
+                    setUserName(response.data.name)
                     localStorage.setItem("token",response.data.token)
                     toast.success("login successfull..")
                     console.log(response.data.token);

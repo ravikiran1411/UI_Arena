@@ -7,6 +7,7 @@ const schema = mongoose.Schema({
     htmlCode:{type:String,default:""},
     cssCode:{type:String,default:""},
     status:{type:String,enum:["in-progress","completed"],default:"in-progress"},
+    
 
 },{timestamps:true})
 

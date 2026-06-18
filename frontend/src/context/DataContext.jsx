@@ -13,6 +13,7 @@ const DataContextProvider = (props) => {
     const [token,setToken]=useState(localStorage.getItem('token') || "")
     const [challenge,setChallenge] = useState([])
     const [submissions,setSubmissions] = useState([])    
+    const [userName,setUserName] = useState("")
 
     console.log(token);
 
@@ -20,9 +21,14 @@ const DataContextProvider = (props) => {
 
     const totalChallenges = challenge.length
     const completedCount = submissions.filter((item)=>item.status==="completed").length;
-    const inprogressCount = submissions.filter((item)=>item.status==="in-progress").length
+    const inprogressCount = submissions.filter((item)=>item.status==="in-progress").length;
+    const easyCount = submissions.filter((item)=>item.status==="completed" && item.challengeId.difficulty.toLowerCase() === "easy").length || 0;
+    const mediumCount = submissions.filter((item)=>item.status==="completed" && item.challengeId.difficulty.toLowerCase() ==="medium").length || 0;
+    const hardCount = submissions.filter((item)=> item.status==="completed" && item.challengeId.difficulty.toLowerCase()==="hard").length || 0;
+    const HTMLCount = submissions.filter((item)=> item.status==="completed" && item.challengeId.category.toLowerCase()==="html").length || 0;
+    const CSSCount = submissions.filter((item)=> item.status==="completed" && item.challengeId.category.toLowerCase()==="css").length || 0
 
-    
+
     const challengeList = async () => {
         try {
             
@@ -43,9 +49,11 @@ const DataContextProvider = (props) => {
     const getUserSubmissions = async () => {
         try {
             const response = await axios.get(backendUrl+'/api/submission/user',{headers:{token:finalToken}})
-            console.log(response.data);
+            console.log(response.data.challengeId);
 
             if (response.data.success) {
+                console.log(response.data);
+                
                 setSubmissions(response.data.challenges)
             }
            
@@ -53,6 +61,8 @@ const DataContextProvider = (props) => {
             console.log(error);
         }
     }
+
+    
 
     useEffect(()=>{
         challengeList()
@@ -65,7 +75,8 @@ const DataContextProvider = (props) => {
     },[token])
 
     const value = {
-        token,setToken,backendUrl,challenge,setChallenge,submissions,totalChallenges,completedCount,inprogressCount
+        token,setToken,backendUrl,challenge,setChallenge,submissions,totalChallenges,completedCount,inprogressCount,
+        easyCount,mediumCount,hardCount,HTMLCount,CSSCount,userName,setUserName
     }
 
     return (

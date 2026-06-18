@@ -47,8 +47,9 @@ const getUserSubmission = async (req,res) => {
         
         const userId = req.userId
 
-        const challenges = await submissionModel.find({userId}).select("challengeId status")
-
+        const challenges = await submissionModel.find({userId}).select("challengeId status updatedAt").populate("challengeId" ,"title difficulty challengeNumber category")
+        console.log(challenges);
+        
         res.json({success:true,challenges})
 
     } catch (error) {

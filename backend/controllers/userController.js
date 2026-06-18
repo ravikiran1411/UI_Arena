@@ -21,6 +21,8 @@ const userLogin = async (req,res) => {
             return res.json({success:false,message:"user not found..please register"})
         }
 
+        const name=user.name
+
         const isMatching = await bcrypt.compare(password,user.password)
 
         if (!isMatching) {
@@ -29,7 +31,7 @@ const userLogin = async (req,res) => {
 
         const token = generateToken(user._id)
 
-        res.json({success:true,token})
+        res.json({success:true,token,name})
 
 
     } catch (error) {
@@ -64,7 +66,7 @@ const userRegister = async (req,res) => {
 
         const token = generateToken(user._id)
 
-        res.json({success:true,token})
+        res.json({success:true,token,name})
 
     } catch (error) {
         res.json({success:false,message:error.message})
