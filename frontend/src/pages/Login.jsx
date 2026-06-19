@@ -29,7 +29,7 @@ const Login = () => {
         try {
             if (loginType==="signUp") {
                 
-                const response = await axios.post(backendUrl+'/api/auth/register',{name,email,password})
+                const response = await axios.post(backendUrl+'/api/user/register',{name,email,password})
                 if (response.data.success) {
                     
                     setToken(response.data.token)
@@ -42,8 +42,7 @@ const Login = () => {
             else {
                 console.log("before");
                 
-                const response = await axios.post(backendUrl+'/api/auth/login',{email,password})
-                
+                const response = await axios.post(backendUrl+'/api/user/login',{email,password})
                 
                 if (response.data.success) {
                     setToken(response.data.token)
@@ -66,31 +65,31 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center">
 
-        <form onSubmit={submitHandler} className="bg-neutral-900 w-112.5 max-w-[90%] mx-auto mt-20 p-8 rounded-xl border border-neutral-800 flex flex-col gap-5">
+        <form onSubmit={submitHandler} className="bg-slate-900 w-112.5 max-w-[90%] mx-auto mt-20 p-8 rounded-xl border border-slate-800 flex flex-col gap-5">
             <div>
-                <h1 className='text-3xl font-bold uppercase text-center '>{loginType}</h1>
+                <h1 className='text-3xl font-bold uppercase text-center text-cyan-400'>{loginType}</h1>
             </div>
             <div className='flex flex-col gap-3'>
                 { loginType === 'signUp' && (
                     <div className='flex flex-col gap-2'>
-                        <label className='text-lg font-medium text-neutral-400'>Enter user name</label>
+                        <label className='text-lg font-medium text-slate-400'>Enter user name</label>
                         <input 
                         type='text' 
                         value={name}
                         onChange={(e)=>setName(e.target.value)}
-                        className='outline-none border border-neutral-700 text-xl w-full h-12 px-4 rounded-lg focus:border-rose-500' 
+                        className='outline-none border border-slate-700 text-slate-100 text-xl w-full h-12 px-4 rounded-lg focus:border-cyan-400' 
                         />
                     </div>
                     )   
                 }
 
                 <div className='text-xl flex flex-col gap-2'>
-                    <label className='text-lg font-medium text-neutral-400'>Enter Email:</label>
+                    <label className='text-lg font-medium text-slate-400'>Enter Email:</label>
                     <input 
                     type='email'
                     value={email}
                     onChange={(e)=>setEmail(e.target.value)}
-                    className='outline-none border border-neutral-700 text-neutral-100 text-xl w-full h-12 px-4 rounded-lg focus:border-rose-500' 
+                    className='outline-none border border-slate-700 text-slate-100 text-xl w-full h-12 px-4 rounded-lg focus:border-cyan-400' 
                     />
                 </div>
 
@@ -100,20 +99,20 @@ const Login = () => {
                     type='password' 
                     value={password}
                     onChange={(e)=>setPassword(e.target.value)}
-                    className='outline-none border border-neutral-700 text-neutral-100 text-xl w-full h-12 px-4 rounded-lg focus:border-rose-500' 
+                    className='outline-none border border-slate-700 text-slate-100 text-xl w-full h-12 px-4 rounded-lg focus:border-cyan-400' 
                     />
                 </div>
             </div>
 
             <div className='flex justify-between gap-5'>
 
-                <p className="text-neutral-400 hover:text-rose-500 cursor-pointer">Forgot Password?</p>
+                <p className="text-slate-400 hover:text-cyan-400 cursor-pointer">Forgot Password?</p>
 
                 <div>
                     {
                         loginType==="login" && (
                         <p className="text-neutral-400">Don't have an account?
-                            <span onClick={()=>switchMode("signUp")} className="text-rose-500 cursor-pointer ml-1">
+                            <span onClick={()=>switchMode("signUp")} className="text-cyan-400 cursor-pointer ml-1">
                                 Sign Up
                             </span>
                         </p>
@@ -121,13 +120,13 @@ const Login = () => {
                     }
                 {
                 loginType==='signUp' && (
-                    <span onClick={()=>switchMode("login")} className='text-lg font-medium text-rose-500'>login</span>
+                    <span onClick={()=>switchMode("login")} className='text-lg font-medium text-cyan-400'>login</span>
                 )
                 }
                 </div>
             </div>
             
-            <button type='submit' className='border p-2 text-white bg-rose-500 hover:bg-rose-600 rounded transition-all duration-300 text-xl uppercase'>{loginType}</button>
+            <button type='submit' className='border p-2 text-white bg-cyan-500 hover:bg-cyan-300 rounded transition-all duration-300 text-xl uppercase'>{loginType}</button>
         </form>
     </div>
   )
