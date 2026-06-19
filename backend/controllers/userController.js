@@ -102,4 +102,30 @@ const adminLogin = async (req,res) => {
     }
 }
 
-export {userLogin,userRegister,adminLogin}
+const getLeaderboard = async (req,res) => {
+    try {
+        
+        const userId = req.userId;
+
+        const leaderboard = await userModel.find({}).select("name points profileImage").sort({points:-1}).limit(10);
+
+        const allUsers = await userModel.find({}).select("_id name points profileImage").sort({points:-1})
+
+        const userRank = allUsers.findIndex(user=>user._id.toString()===userId)+1
+
+        const userDetails = allUsers.find(user=>user._id.toString()===userId);
+
+        res.json({success:true,leaderboard,currentUserDetails:{
+            rank:userRank,
+            name:userDetails?.name,
+            points:userDetails?.points,
+            profileImg:userDetails?.profileImage,
+        }})
+
+    } catch (error) {
+        console.log(error.message);
+        res.json({success:false,message:error.message})
+    }
+}
+
+export {userLogin,userRegister,adminLogin,getLeaderboard}

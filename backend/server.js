@@ -20,7 +20,7 @@ app.use(express.json())
 connectDB()
 connectCloudinary()
 
-app.use("/api/auth",userRouter)
+app.use("/api/user",userRouter)
 app.use('/api/challenge',challengeRouter)
 app.use('/api/submission',submissionRouter)
 
