@@ -14,6 +14,8 @@ const DataContextProvider = (props) => {
     const [challenge,setChallenge] = useState([])
     const [submissions,setSubmissions] = useState([])    
     const [userName,setUserName] = useState("")
+    const [leaderboard,setLeaderboard] = useState([])
+    const [currentUser,setCurrentUser] = useState(null)
 
     console.log(token);
 
@@ -53,7 +55,7 @@ const DataContextProvider = (props) => {
 
             if (response.data.success) {
                 console.log(response.data);
-                
+            
                 setSubmissions(response.data.challenges)
             }
            
@@ -62,7 +64,24 @@ const DataContextProvider = (props) => {
         }
     }
 
-    
+    const getLeaderboard = async () => {
+        try {
+            const response = await axios.post(backendUrl+'/api/user/leaderboard',{},{headers:{token:finalToken}})
+            if (response.data.success) {
+                console.log(response.data);
+                setLeaderboard(response.data.leaderboard)
+                setCurrentUser(response.data.currentUserDetails)
+                
+            }
+            else{
+                console.log(response.data.message);
+                
+            }
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
 
     useEffect(()=>{
         challengeList()
@@ -71,12 +90,14 @@ const DataContextProvider = (props) => {
     useEffect(()=>{
         if(token){
             getUserSubmissions()
+            getLeaderboard()
+
         }
     },[token])
 
     const value = {
         token,setToken,backendUrl,challenge,setChallenge,submissions,totalChallenges,completedCount,inprogressCount,
-        easyCount,mediumCount,hardCount,HTMLCount,CSSCount,userName,setUserName
+        easyCount,mediumCount,hardCount,HTMLCount,CSSCount,userName,setUserName,leaderboard,currentUser
     }
 
     return (

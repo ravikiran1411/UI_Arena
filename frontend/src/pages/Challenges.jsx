@@ -20,8 +20,9 @@ const Challenges = () => {
   || item.challengeNumber.toString().includes(search) )) : difficultyChallenges
 
   const getStatus = (id) => {
+        
+    const submission = submissions.find((item)=>item.challengeId._id.toString() === id.toString())    
     
-    const submission = submissions.find((item)=>item.challengeId.toString() === id.toString())    
 
     return submission?.status
 
@@ -143,7 +144,6 @@ const Challenges = () => {
                 <p className='text-slate-400'>{item.category}</p>
                 <p className={ item.difficulty === "Easy" ? "text-emerald-500" : item.difficulty === "Medium" ? "text-yellow-500" : "text-red-500"}>{item.difficulty}</p>
              
-
                 {
                   getStatus(item._id) === "completed" ? (
                     <button onClick={()=>navigate(`/challengedetails/${item._id}`)} className="bg-emerald-500 px-4 py-2 rounded-lg text-white w-35">Completed</button>
