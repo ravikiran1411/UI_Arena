@@ -24,7 +24,7 @@ const Footer = () => {
                 </div>
                 
                 <div>
-                    <h3 className='text-slate-100 font-semibold mb-2'>Connect</h3>
+                    <h3 className='text-slate-100 font-semibold mb-2'>Contact</h3>
                     <div className='flex flex-col'>
                         <p className='text-slate-400 leading-relaxed'>Vishapatnam, India</p>
                         <p className='text-slate-400 leading-relaxed'>uiarena@gmail.com</p>
@@ -39,9 +39,6 @@ const Footer = () => {
                 <p className='text-slate-500 text-sm text-center mt-5'>&copy; 2026 UIArena. All rights reserved.</p>
 
             </div>
-
-
-        
 
       </div>
 
