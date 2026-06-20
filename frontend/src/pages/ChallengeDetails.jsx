@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import Editor from '@monaco-editor/react'
+import { assets } from '../assets/assets';
 
 const ChallengeDetails = () => {
 
@@ -254,9 +255,11 @@ const ChallengeDetails = () => {
               : result.map((item,index)=>(
               <div
               key={index}
-              className={item.passed ? "bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 p-3 rounded-lg" : "bg-red-500/10 border border-red-500/20 text-red-500 p-3 rounded-lg"}
+              className={`${item.passed ? "bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 p-3 rounded-lg" : "bg-red-500/10 border border-red-500/20 text-red-500 p-3 rounded-lg"} p-3 rounded-lg flex items-center gap-3 `}
               >
-                {item.passed ? "✅" : "❌"} {item.message}
+                <p>{item.message}</p>
+                <img src={item.passed ? assets.done : assets.wrong} className="w-8 sm:w-10 shrink-0" alt=""/>
+
               </div>
               ))}
             </div>
@@ -362,7 +365,6 @@ const ChallengeDetails = () => {
                 </div>
               </div>
             </div>
-            
 
             <div className='flex gap-5 justify-end text-xl'>
               <button className='bg-slate-700 hover:bg-cyan-600 px-4 py-1 rounded-lg text-white font-medium' onClick={resetButton}>Reset</button>

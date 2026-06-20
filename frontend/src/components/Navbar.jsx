@@ -51,10 +51,10 @@ const Navbar = () => {
         {
             open && (
                 <div className='sm:hidden mt-4 flex flex-col gap-4 bg-slate-900 rounded-xl p-4'>
-                    <NavLink to='/challenges' onClick={() => setOpen(false)} className='hover:text-cyan-400'>Challenges</NavLink>
-                    <NavLink to='/dashboard' onClick={() => setOpen(false)} className='hover:text-cyan-400'>Dashboard</NavLink>
-                    <NavLink to='/leaderboard' onClick={() => setOpen(false)} className='hover:text-cyan-400'>Leaderboard</NavLink>
-                    <NavLink to='/profile' onClick={() => setOpen(false)} className='hover:text-cyan-400'>Profile</NavLink>
+                    <NavLink to='/challenges' onClick={() => setOpen(false)} className= 'text-slate-100 hover:text-cyan-400'>Challenges</NavLink>
+                    <NavLink to='/dashboard' onClick={() => setOpen(false)} className='text-slate-100 hover:text-cyan-400'>Dashboard</NavLink>
+                    <NavLink to='/leaderboard' onClick={() => setOpen(false)} className='text-slate-100 hover:text-cyan-400'>Leaderboard</NavLink>
+                    <NavLink to='/profile' onClick={() => setOpen(false)} className='text-slate-100 hover:text-cyan-400'>Profile</NavLink>
                 </div>
             )
         }

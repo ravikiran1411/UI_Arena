@@ -36,19 +36,20 @@ const Challenges = () => {
       <h1 className='text-4xl font-bold text-slate-100'>Challenges</h1>
       <p className='text-slate-400 mt-2'>Practice real UI challenges and improve your frontend skills</p>
 
-      <div className='mt-8'>
-        <input
-          type="text"
-          placeholder="Search challenges..."
-          value={search}
-          onChange={(e) =>{ 
-            setSearch(e.target.value)
-            if (e.target.value.trim() !== "") {
-              setCategory("All");
-              setDifficulty("All");
-            }
-          }}
-          className='w-full bg-slate-900 border border-slate-800 rounded-xl h-12 px-4 text-slate-100 outline-none focus:border-cyan-500 placeholder:text-slate-400'
+      <div className='mt-8 relative'>
+        <img src={assets.search_icon} alt="" className='absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 opacity-60'/>
+        <input 
+        type="text" 
+        placeholder="Search challenges..."
+        value={search}
+        onChange={(e) => {
+          setSearch(e.target.value)
+          if (e.target.value.trim() !== "") {
+            setCategory("All")
+            setDifficulty("All")
+          }
+        }}
+        className='w-full bg-slate-900 border border-slate-800 rounded-xl h-12 pl-12 pr-4 text-slate-100 outline-none focus:border-cyan-500 placeholder:text-slate-400'
         />
       </div>
 
@@ -171,9 +172,6 @@ const Challenges = () => {
                     <img src={bookmark.some(bookmarkItem => bookmarkItem._id === item._id) ? assets.bookmark2 : assets.bookmark} alt=""/>
                   </button>
                 </div>
-
-               
-
 
                 {
                   getStatus(item._id) === "completed" ? (
