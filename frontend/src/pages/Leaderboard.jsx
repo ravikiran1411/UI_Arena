@@ -2,11 +2,16 @@ import React, { useContext } from 'react'
 import { DataContext } from '../context/DataContext'
 import { assets } from '../assets/assets';
 import Login from './Login';
+import LeaderboardSkeleton from '../components/LeaderboardSkeleton';
 
 const Leaderboard = () => {
   
-  const {leaderboard,currentUser,token} = useContext(DataContext);
+  const {leaderboard,currentUser,token,loading} = useContext(DataContext);
   const finalToken = localStorage.getItem('token') || token 
+
+  if (loading) {
+    return <LeaderboardSkeleton/>
+  }
 
   return (
     <div>

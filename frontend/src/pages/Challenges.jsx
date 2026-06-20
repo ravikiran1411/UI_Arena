@@ -7,7 +7,7 @@ import { assets } from '../assets/assets';
 const Challenges = () => {
 
   const navigate = useNavigate();
-  const {backendUrl,token,challenge,setChallenge,submissions,toggleBookmark,bookmark,setBookmark} = useContext(DataContext)
+  const {backendUrl,token,challenge,setChallenge,submissions,toggleBookmark,bookmark,setBookmark,loading} = useContext(DataContext)
   console.log(bookmark);
   
 
@@ -120,9 +120,16 @@ const Challenges = () => {
 
         </div>
       </div>
+      {
+      loading && (
+      <div className='text-center py-16'>
+        <p className='text-cyan-400 text-lg'>Loading challenges...</p>
+        <p className='text-slate-500 text-sm mt-2'>Server may take few seconds to load challenges </p>
+      </div>
+      )}
 
       {
-        filteredChallenges.length === 0 && (
+        !loading && filteredChallenges.length === 0 && (
           <div className='text-center py-16'>
             <p className='text-slate-400 text-lg'>No challenges found</p>
           </div>

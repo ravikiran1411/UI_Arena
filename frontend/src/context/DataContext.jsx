@@ -18,6 +18,7 @@ const DataContextProvider = (props) => {
     const [currentUser,setCurrentUser] = useState(null)
     const [profileData,setProfileData] = useState({})
     const [bookmark,setBookmark] = useState([])
+    const [loading,setLoading] = useState(true)
 
     console.log(token);
 
@@ -62,6 +63,9 @@ const DataContextProvider = (props) => {
            
         } catch (error) {
             console.log(error);
+        }
+        finally{
+            setLoading(false)
         }
     }
 
@@ -148,7 +152,7 @@ const DataContextProvider = (props) => {
     const value = {
         token,setToken,backendUrl,challenge,setChallenge,submissions,totalChallenges,completedCount,inprogressCount,
         easyCount,mediumCount,hardCount,HTMLCount,CSSCount,userName,setUserName,leaderboard,currentUser,profileData,
-        toggleBookmark,bookmark,setBookmark,
+        toggleBookmark,bookmark,setBookmark,getProfileData,loading
     }
 
     return (

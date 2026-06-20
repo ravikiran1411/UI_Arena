@@ -7,6 +7,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useEffect } from 'react'
+import { LogIn } from 'lucide-react'
 
 const Profile = () => {
 
@@ -57,6 +58,10 @@ const Profile = () => {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  if (!finalToken) {
+    return <LogIn/>
   }
 
   useEffect(() => {

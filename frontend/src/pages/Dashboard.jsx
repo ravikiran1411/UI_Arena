@@ -1,17 +1,27 @@
-import React, { useContext } from 'react'
+import React, { useContext,useEffect } from 'react'
 import { DataContext } from '../context/DataContext'
 import Login from './Login';
+import DashboardSkeleton from '../components/DashboardSkeleton';
+import { useNavigate } from 'react-router-dom'
+
 
 const Dashboard = () => {
   
-  const {token,submissions,totalChallenges,completedCount,inprogressCount,easyCount,mediumCount,hardCount,HTMLCount,CSSCount,userName} = useContext(DataContext);
-
+  const {token,submissions,totalChallenges,completedCount,inprogressCount,easyCount,mediumCount,hardCount,HTMLCount,CSSCount,userName,loading} = useContext(DataContext);
   const finalToken = localStorage.getItem("token") || token
-    
-  const inProgress = submissions.filter((item)=>item.status==="in-progress")
+  const inProgress = submissions?.filter((item)=>item.status==="in-progress") || []
+  const challenges = [...(submissions || [])].sort((a,b)=>new Date(b.updatedAt)-new Date(a.updatedAt)).slice(0,5)
 
-  const challenges = [...submissions].sort((a,b)=>new Date(b.updatedAt)-new Date(a.updatedAt)).slice(0,5)
-        
+  const navigate = useNavigate()
+
+  if (!finalToken) {
+    return <Login />
+  }
+  
+  if (loading) {
+    return <DashboardSkeleton/>
+  }
+
 
   return (
       finalToken ? 
