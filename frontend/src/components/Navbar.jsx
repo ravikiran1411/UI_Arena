@@ -11,7 +11,6 @@ const Navbar = () => {
 
     const finalToken = localStorage.getItem("token") || token
 
-
   return (
     <div id="navbar" className='bg-slate-900/80 border-b border-slate-700 px-4 sm:px-20 py-3 sm:py-5 sticky top-0 z-50 backdrop-blur-md'>
         <div className='max-w-7xl mx-auto flex justify-between'>

@@ -16,6 +16,8 @@ const DataContextProvider = (props) => {
     const [userName,setUserName] = useState("")
     const [leaderboard,setLeaderboard] = useState([])
     const [currentUser,setCurrentUser] = useState(null)
+    const [profileData,setProfileData] = useState({})
+    const [bookmark,setBookmark] = useState([])
 
     console.log(token);
 
@@ -51,7 +53,6 @@ const DataContextProvider = (props) => {
     const getUserSubmissions = async () => {
         try {
             const response = await axios.get(backendUrl+'/api/submission/user',{headers:{token:finalToken}})
-            console.log(response.data.challengeId);
 
             if (response.data.success) {
                 console.log(response.data);
@@ -71,7 +72,6 @@ const DataContextProvider = (props) => {
                 console.log(response.data);
                 setLeaderboard(response.data.leaderboard)
                 setCurrentUser(response.data.currentUserDetails)
-                
             }
             else{
                 console.log(response.data.message);
@@ -79,7 +79,55 @@ const DataContextProvider = (props) => {
             }
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    const getProfileData = async () => {
+        try {
+            const response = await axios.get(backendUrl+'/api/profile/details',{headers:{token:finalToken}})
+            if (response.data.success) {
+                setProfileData(response.data.userData)
+                
+            }
+            else{
+                console.log(response.data.message );
+            }
+        } catch (error) {
+            console.log(error);
             
+        }
+    }
+
+    const toggleBookmark = async (id) => {
+        try {
+            
+            const response = await axios.post(backendUrl+'/api/profile/bookmark',{challengeId:id},{headers:{token:finalToken}})
+
+            if (response.data.success) {
+                getBookmarks();
+                toast.success(response.data.message)
+            }
+            else{
+                toast.error("bookmark failed to add/remove")
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error("something went wrong");
+        }
+    }
+
+    const getBookmarks = async () => {
+        try {
+            const response = await axios.get(backendUrl+'/api/profile/allbookmarks',{headers:{token:finalToken}});
+            if (response.data.success) {
+                setBookmark(response.data.bookmarks)
+            }
+            else{
+                console.log(response.data.message);
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -91,13 +139,16 @@ const DataContextProvider = (props) => {
         if(token){
             getUserSubmissions()
             getLeaderboard()
-
+            getProfileData()
+            getBookmarks()
         }
     },[token])
 
+
     const value = {
         token,setToken,backendUrl,challenge,setChallenge,submissions,totalChallenges,completedCount,inprogressCount,
-        easyCount,mediumCount,hardCount,HTMLCount,CSSCount,userName,setUserName,leaderboard,currentUser
+        easyCount,mediumCount,hardCount,HTMLCount,CSSCount,userName,setUserName,leaderboard,currentUser,profileData,
+        toggleBookmark,bookmark,setBookmark,
     }
 
     return (

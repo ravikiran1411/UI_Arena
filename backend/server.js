@@ -8,6 +8,7 @@ import userRouter from './routes/userRoutes.js'
 import connectCloudinary from './config/cloudinary.js'
 import challengeRouter from './routes/challengeRoutes.js'
 import submissionRouter from './routes/submissionRoutes.js'
+import profileRouter from './routes/profileRoutes.js'
 
 
 const app = express()
@@ -23,6 +24,7 @@ connectCloudinary()
 app.use("/api/user",userRouter)
 app.use('/api/challenge',challengeRouter)
 app.use('/api/submission',submissionRouter)
+app.use('/api/profile',profileRouter)
 
 const PORT = process.env.PORT || 5000;
 

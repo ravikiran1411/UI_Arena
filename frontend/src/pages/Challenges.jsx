@@ -2,11 +2,14 @@ import React, { useContext, useState } from 'react'
 import axios from 'axios'
 import { DataContext } from '../context/DataContext'
 import {useNavigate} from 'react-router-dom';
+import { assets } from '../assets/assets';
 
 const Challenges = () => {
 
   const navigate = useNavigate();
-  const {backendUrl,token,challenge,setChallenge,submissions} = useContext(DataContext)
+  const {backendUrl,token,challenge,setChallenge,submissions,toggleBookmark,bookmark,setBookmark} = useContext(DataContext)
+  console.log(bookmark);
+  
 
   const [search, setSearch] = useState("")
   const [category,setCategory]=useState("All")
@@ -23,7 +26,6 @@ const Challenges = () => {
         
     const submission = submissions.find((item)=>item.challengeId._id.toString() === id.toString())    
     
-
     return submission?.status
 
   }
@@ -121,29 +123,26 @@ const Challenges = () => {
       {
         filteredChallenges.length === 0 && (
           <div className='text-center py-16'>
-            <p className='text-slate-400 text-lg'>
-              No challenges found
-            </p>
+            <p className='text-slate-400 text-lg'>No challenges found</p>
           </div>
         )
       }
 
-      <div className='mt-8 flex flex-col gap-3'>
+      <div className='mt-8 flex flex-col gap-3 bg-slate-900 rounded-2xl'>
         {
           filteredChallenges.map((item) => (
 
             <div
               key={item._id}
-              className='bg-slate-900 border border-slate-800 rounded-xl p-4 hover:border-cyan-500 transition-all duration-300'
+              className='p-4'
             >
 
-              <div className='hidden md:grid grid-cols-[0.5fr_2fr_1fr_1fr_auto] items-center gap-4'>
+              <div className='hidden md:grid grid-cols-[0.5fr_2fr_1fr_1fr_1fr_1fr] items-center gap-4'>
 
                 <p className='text-slate-100 font-medium'>#{item.challengeNumber}</p>
                 <p className='text-slate-100 font-medium'>{item.title}</p>
                 <p className='text-slate-400'>{item.category}</p>
                 <p className={ item.difficulty === "Easy" ? "text-emerald-500" : item.difficulty === "Medium" ? "text-yellow-500" : "text-red-500"}>{item.difficulty}</p>
-             
                 {
                   getStatus(item._id) === "completed" ? (
                     <button onClick={()=>navigate(`/challengedetails/${item._id}`)} className="bg-emerald-500 px-4 py-2 rounded-lg text-white w-35">Completed</button>
@@ -153,11 +152,14 @@ const Challenges = () => {
                     <button onClick={()=>navigate(`/challengedetails/${item._id}`)} className="bg-cyan-500 px-3 py-2 rounded-lg text-white w-35">Start Challenge</button>
                   )
                 }
+                
+                <button onClick={() => toggleBookmark(item._id)} className="w-8">
+                  <img src={bookmark.some(bookmarkItem => bookmarkItem._id === item._id) ? assets.bookmark2 : assets.bookmark} alt=""/>
+                </button>
 
               </div>
 
               <div className='md:hidden'>
-
                 <div className='flex gap-2 items-center'>
                   <p className='text-cyan-500 font-semibold'>#{item.challengeNumber}</p>
                   <span className='text-cyan-500 font-semibold'> {item.title}</span>
@@ -165,14 +167,13 @@ const Challenges = () => {
                 <div className='flex justify-evenly gap-3 mt-2'>
                   <span className='text-slate-400'>{item.category}</span>
                   <span className={item.difficulty === "Easy" ? "text-emerald-500" : item.difficulty === "Medium" ? "text-yellow-500" : "text-red-500"}>{item.difficulty}</span>
+                  <button onClick={() => toggleBookmark(item._id)} className="w-6">
+                    <img src={bookmark.some(bookmarkItem => bookmarkItem._id === item._id) ? assets.bookmark2 : assets.bookmark} alt=""/>
+                  </button>
                 </div>
 
-                {/* <button 
-                className='w-full mt-4 bg-cyan-500 hover:bg-cyan-600 py-2 rounded-lg text-slate-100 transition-all duration-300'
-                onClick={()=>navigate(`/challengedetails/${item._id}`)}
-                >
-                  Start Challenge
-                </button> */}
+               
+
 
                 {
                   getStatus(item._id) === "completed" ? (
@@ -184,8 +185,8 @@ const Challenges = () => {
                   )
                 }
 
-
               </div>
+              <div className='w-full border border-cyan-400/10 mt-2'></div>
 
             </div>
 
