@@ -27,11 +27,11 @@ const DataContextProvider = (props) => {
     const totalChallenges = challenge.length
     const completedCount = submissions.filter((item)=>item.status==="completed").length;
     const inprogressCount = submissions.filter((item)=>item.status==="in-progress").length;
-    const easyCount = submissions.filter((item)=>item.status==="completed" && item.challengeId.difficulty.toLowerCase() === "easy").length || 0;
-    const mediumCount = submissions.filter((item)=>item.status==="completed" && item.challengeId.difficulty.toLowerCase() ==="medium").length || 0;
-    const hardCount = submissions.filter((item)=> item.status==="completed" && item.challengeId.difficulty.toLowerCase()==="hard").length || 0;
-    const HTMLCount = submissions.filter((item)=> item.status==="completed" && item.challengeId.category.toLowerCase()==="html").length || 0;
-    const CSSCount = submissions.filter((item)=> item.status==="completed" && item.challengeId.category.toLowerCase()==="css").length || 0
+    const easyCount = submissions.filter((item)=>item.status==="completed" && item.challengeId.difficulty?.toLowerCase() === "easy").length || 0;
+    const mediumCount = submissions.filter((item)=>item.status==="completed" && item.challengeId.difficulty?.toLowerCase() ==="medium").length || 0;
+    const hardCount = submissions.filter((item)=> item.status==="completed" && item.challengeId.difficulty?.toLowerCase()==="hard").length || 0;
+    const HTMLCount = submissions.filter((item)=> item.status==="completed" && item.challengeId.category?.toLowerCase()==="html").length || 0;
+    const CSSCount = submissions.filter((item)=> item.status==="completed" && item.challengeId.category?.toLowerCase()==="css").length || 0
 
 
     const challengeList = async () => {
